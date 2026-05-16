@@ -1,0 +1,10 @@
+node_modules/
+main.js
+main.js.map
+dist/
+.obsidian/
+*.zip
+.DS_Store
+.env
+.env.local
+coverage/

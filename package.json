@@ -1,0 +1,21 @@
+{
+  "name": "obsidian-cosmos",
+  "version": "0.1.0",
+  "description": "Sync an Obsidian vault into the Cosmos exocortex.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Polarity Lab",
+  "scripts": {
+    "build": "node esbuild.config.mjs production",
+    "dev": "node esbuild.config.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "esbuild": "^0.20.0",
+    "obsidian": "^1.4.11",
+    "typescript": "^5.3.3",
+    "vitest": "^1.4.0"
+  }
+}

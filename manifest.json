@@ -1,0 +1,10 @@
+{
+  "id": "cosmos",
+  "name": "Cosmos",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Sync your vault into the Cosmos exocortex.",
+  "author": "Polarity Lab",
+  "authorUrl": "https://polarity-lab.com",
+  "isDesktopOnly": false
+}
