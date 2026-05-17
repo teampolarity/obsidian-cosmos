@@ -10,6 +10,13 @@ export interface CosmosSettings {
   syncIntervalMinutes: number;
   lastSyncedAt: string | null;
   syncedFiles: Record<string, { hash: string; syncedAt: string }>;
+  // Watermark for the bulk-walk path (syncAll, plugin-load catch-up).
+  // Newest file mtime (epoch ms) covered by a prior successful walk.
+  // Files with mtime <= watermark are skipped before we even hash them,
+  // so a re-walk on an unchanged 50k-note vault returns in milliseconds
+  // instead of reading every file off disk. Live `vault.on('modify')`
+  // saves bypass this entirely — they always sync.
+  lastIncrementalMtimeMs: number;
 }
 
 export const DEFAULT_SETTINGS: CosmosSettings = {
@@ -20,6 +27,7 @@ export const DEFAULT_SETTINGS: CosmosSettings = {
   syncIntervalMinutes: 0,
   lastSyncedAt: null,
   syncedFiles: {},
+  lastIncrementalMtimeMs: 0,
 };
 
 export class CosmosSettingTab extends PluginSettingTab {

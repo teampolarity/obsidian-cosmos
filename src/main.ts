@@ -1,6 +1,6 @@
 import { Plugin, TFile, debounce } from "obsidian";
 import { CosmosSettingTab, DEFAULT_SETTINGS, type CosmosSettings } from "./settings";
-import { syncAll, syncOne } from "./sync";
+import { syncAll, syncIncrementalCatchup, syncOne } from "./sync";
 
 export default class CosmosPlugin extends Plugin {
   settings!: CosmosSettings;
@@ -54,6 +54,10 @@ export default class CosmosPlugin extends Plugin {
     );
 
     this.refreshTimers();
+
+    // Fire-and-forget catch-up walk. Skips silently when the vault
+    // has no edits past the watermark, so plugin reloads stay quiet.
+    void syncIncrementalCatchup(this);
   }
 
   onunload(): void {
