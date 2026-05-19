@@ -43,7 +43,7 @@ export class CosmosClient {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "X-MCP-Key": this.settings.mcpKey,
-      "User-Agent": "obsidian-cosmos/0.1.0",
+      "User-Agent": "obsidian-cosmos/0.2.1",
     };
     if (this.settings.polarityUserId) {
       headers["X-Polarity-User-Id"] = this.settings.polarityUserId;

@@ -90,8 +90,21 @@ export class CosmosSettingTab extends PluginSettingTab {
             new Notice(`Connected. polarity_user_id = ${res.polarity_user_id}`);
             this.display();
           } catch (e) {
-            const msg = e instanceof Error ? e.message : String(e);
-            new Notice(`Connection failed. ${msg}`);
+            // Surface guidance, not the raw error envelope. Most users
+            // hit one of three things: a typo'd key, an expired key, or
+            // network down. Make each one actionable.
+            const status = (e as { status?: number })?.status;
+            let msg = "Connection failed. ";
+            if (status === 401 || status === 403) {
+              msg += "The MCP key was rejected. Paste a fresh key from your Cosmos /connectors page.";
+            } else if (status && status >= 500) {
+              msg += `Cosmos is unreachable (${status}). Try again in a moment.`;
+            } else if (status === 0 || status === undefined) {
+              msg += "Could not reach Cosmos. Check your network and the API base URL.";
+            } else {
+              msg += e instanceof Error ? e.message : String(e);
+            }
+            new Notice(msg);
           } finally {
             btn.setDisabled(false);
             btn.setButtonText("Test");
