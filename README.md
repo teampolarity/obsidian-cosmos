@@ -44,7 +44,7 @@ The plugin keeps a small map of file path to body hash in its data file so it ca
 
 ## Privacy
 
-Your notes are written to your Cosmos user only. The server stores the body hash, a four-kilobyte excerpt on the reference node, and the full markdown on the source page row. Cosmos applies the same auth and isolation rules as the rest of the Polarity Lab surface. The repo at github.com/taiscoding/cosmos and its fork document the storage in full.
+Your notes are written to your Cosmos user only. The server stores the body hash, a four-kilobyte excerpt on the reference node, and the full markdown on the source page row. Cosmos applies the same auth and isolation rules as the rest of the Polarity Lab surface.
 
 ## Commands
 
